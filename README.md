@@ -62,3 +62,8 @@ First, this is super simple and since my Proxmox and TrueNAS are Linux Based I w
  
 ## Closing Summary
 This process is super simple and you can simply create a cron job to run the **rclone copy** on a schedule.  You can also do this on a Windows OS as well.  If you do some searching you will find various .sh scripts that are much more robust, but I am not looking for complexity, I simply want my files on OneDrive to be backed up to local folder once a week. 
+
+## Helpful commands
+apt install update
+sudo apt install nfs-common
+sudo mount -t nfs 192.168.42.14:/mnt/BigDisks/OneDriveNFS ~/nfsmount 
