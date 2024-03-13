@@ -9,7 +9,7 @@ Recently, I lost access to my personal email as a result of my M365 subscription
 
 I had recently redesigned my Home Network and at the same time I built a new server for Proxmox and TrueNAS with close to 40TB of storage so I can play with all sorts of Tech on my Home Network.  Since I can serve up NFS and SMB shares using TrueNAS, I decided to impliment a solution that allows me to backup my OneDrive to my TrueNAS.  Of course I could write some code to do this, but why do that if the problem has already been solved.  
 
-This is when I came across an Open Source solution call (RClone)[https://rclone.org/]. RClone is a very powerful command line tool that can be used for all sorts of things.  You can use it to mount your OneDrive to a local folder in Linux just like using the OneDrive Client on Windows.  But, this is not what I wanted to do.  I simply want to have a tool that runs on a schedule that copies all my OneDrive data to a backup.
+This is when I came across an Open Source solution call [RClone](https://rclone.org/). RClone is a very powerful command line tool that can be used for all sorts of things.  You can use it to mount your OneDrive to a local folder in Linux just like using the OneDrive Client on Windows.  But, this is not what I wanted to do.  I simply want to have a tool that runs on a schedule that copies all my OneDrive data to a backup.
 
 ## What are the step for this?
 First, this is super simple and since my Proxmox and TrueNAS are Linux Based I will doing this on Linux.
