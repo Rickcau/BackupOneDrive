@@ -68,5 +68,6 @@ This process is super simple and you can simply create a cron job to run the **r
    ~~~
       apt install update
       sudo apt install nfs-common
+      mkdir ~/nfsmount
       sudo mount -t nfs 192.168.42.14:/mnt/BigDisks/OneDriveNFS ~/nfsmount 
    ~~~
