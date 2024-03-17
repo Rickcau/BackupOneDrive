@@ -71,3 +71,72 @@ This process is super simple and you can simply create a cron job to run the **r
       sudo mkdir ~/nfsmount
       sudo mount -t nfs 192.168.42.14:/mnt/BigDisks/OneDriveNFS ~/nfsmount 
    ~~~
+
+## Important Notes when working with SAMBA (SMB) shares on Linux
+
+### Background
+I have a Truenas Server that I have various shares created, both NFS and SMB.  When creating SMB shares in Truenas and connecting from Windows it's super simple, but when connected to that same SMB from Linux it requires more work to do so and ensure you have permissions to be able to perform CRUD operations.
+
+### Steps to perform on the Linux VM to access the SMB share from TrueNAS
+
+1. Make sure you have CIFS and SAMBA installed on the Linux machine you are mounting the SMB.
+
+   ~~~
+       sudo apt-get update
+       sudo apt-get install cifs.utils
+       sudo apt-get install samba
+   ~~~
+
+2. Now, let's create an SMB credentials file which will be used with our mount command
+
+   ~~~
+      sudo nano /etc/samba/.smbcreds
+   ~~~
+
+   Now, you can do an internet search to find examples of what the format for this file should be. 
+
+   ~~~
+      username=mytestaccount
+      password=mytestpassword
+   ~~~
+
+   Now that you have created the file, lets set the permissions to read-only for root.
+
+   ~~~
+      sudo chmod 400 /etc/samba/.smbcreds
+      ls -l /etc/samba/.smbcreds
+   ~~~
+
+4. Now, lets create a directory so we can mount the SMB share into.
+
+   ~~~
+      sudo mkdir /mnt/test
+   ~~~
+
+5. Now, we need to find out what the uid and gid is for the user that will be accessing this SMB.  You can do that with the following command:
+
+   ~~~
+      cat /etc/passwd
+   ~~~
+
+   You will output that looks like this from the **cat** command:
+
+   ~~~
+      mytest:x:1000:1000:Mytest,,,:/home/mytest:/bin/bash
+   ~~~
+
+   The first 1000 represents the uid and the second represents the guid, you need to make note of this.  This is the user that will be access the SMB and we need to pass these values in the **mount** command
+   
+
+7. Now, we can verify that we are able to mount the SMB and create a folder to ensure we have permissions to perform CRUD operations.  We will using our .smbcreds file we created in step 2.  
+
+**Important Note:** Pay close attention to the uid and gid parameters here.  This is the uid and gid of the person that is logged into Linux and this gives them permissions to the mount point.  If you do not do this, you will not be able to create files.
+   
+   ~~~
+     sudo mount -t cifs -o uid=1000,gid=1000,rw,vers=3.0,credentials=/etc/samba/.smbcreds //<Your IP Address>/<ShareName> /<mount>/<test>
+   ~~~
+
+8. Now, using a File Explorer navigate to the mounted share and create a new folder to ensure you have permissions to create a file.
+
+## Here is how you can **auto mount** the the SMB using FSTAB
+
