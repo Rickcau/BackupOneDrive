@@ -59,9 +59,6 @@ First, this is super simple and since my Proxmox and TrueNAS are Linux Based I w
    ~~~
 
    You will see rclone will use the remote config you just created and it will start copying the files from OneDrive to the ~/OneDrive folder.
- 
-## Closing Summary
-This process is super simple and you can simply create a cron job to run the **rclone copy** on a schedule.  You can also do this on a Windows OS as well.  If you do some searching you will find various .sh scripts that are much more robust, but I am not looking for complexity, I simply want my files on OneDrive to be backed up to local folder once a week. 
 
 ## Helpful commands
    
@@ -138,7 +135,7 @@ I have a Truenas Server that I have various shares created, both NFS and SMB.  W
 
 8. Now, using a File Explorer navigate to the mounted share and create a new folder to ensure you have permissions to create a file.
 
-## Here is how you can **auto mount** the the SMB using FSTAB
+## Steps to **auto mount** the the SMB using FSTAB
 
 1. Let's open and modify the fstab file using **nano**.
 
@@ -157,3 +154,14 @@ I have a Truenas Server that I have various shares created, both NFS and SMB.  W
    ~~~
       sudo mount -a
    ~~~
+
+## Closing Summary
+This process is super simple and you can simply create a cron job to run the **rclone copy** on a schedule.  You can also do this on a Windows OS as well.  If you do some searching you will find various .sh scripts that are much more robust, but I am not looking for complexity, I simply want my files on OneDrive to be backed up to local folder once a week.  
+
+### What did you learn?
+
+1. You should now be able to mount and SMB Share on a Linux OS and create files and folders on this share.
+
+2. Using your knowledge of how to mount SMB Shares on Linux, you can now install **rclone** on the Linux OS and run one **rclone* command to backup your OneDrive data to the SMB Share.
+
+This now allows you to have an offline backup of your OneDrive data and if you really want to follow a 3-2-1 backup strategy you could install something like Proxmox Backup sever and backup the SMB backup using deduplication!
