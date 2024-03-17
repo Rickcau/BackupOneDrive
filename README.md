@@ -140,3 +140,20 @@ I have a Truenas Server that I have various shares created, both NFS and SMB.  W
 
 ## Here is how you can **auto mount** the the SMB using FSTAB
 
+1. Let's open and modify the fstab file using **nano**.
+
+   ~~~
+       sudo nano /etc/fstab
+   ~~~
+
+2. Now, using the example **mount** command from previous steps, which you have tested as working, add the following entry:
+
+   ~~~
+      //<Your IP Address>/OneDriveBackup  </your mount/point>  cifs  uid=1000,gid=1000,rw,vers=3.0,credentials=/etc/samba/.smbcreds  0  0
+   ~~~
+
+3. Now, you can test if your fstab entry is correct by running the following command, it will attempt to mount all entries in the **fstab** file.
+
+   ~~~
+      sudo mount -a
+   ~~~
