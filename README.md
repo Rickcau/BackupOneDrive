@@ -12,8 +12,8 @@ I had recently redesigned my Home Network and at the same time I built a new ser
 
 This is when I came across an Open Source solution called [RClone](https://rclone.org/). RClone is a very powerful command line tool that can be used for all sorts of things and it can be used on Linux and Windows.  You can use it to mount your OneDrive to a local folder in Linux just like using the OneDrive Client on Windows and have the folders synced.  But, this is not what I wanted to do.  I simply want to have a tool that runs on a schedule that copies all my OneDrive data to a backup.
 
-## What are the step for this?
-First, this is super simple and since my Proxmox and TrueNAS are Linux Based I will doing this on Linux.
+## What are the steps for this?
+First, this is super simple and since my Proxmox and TrueNAS are Linux Based I will be doing this on Linux.
 
 1. Open a Linux Terminal and run the following to install rclone
 
